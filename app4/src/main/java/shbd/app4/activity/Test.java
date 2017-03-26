@@ -1,5 +1,7 @@
 package shbd.app4.activity;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -20,7 +22,38 @@ import static shbd.app4.activity.ContextAwareScheduler.INSTANCE;
  * 修改备注：
  */
 public class Test {
+    private static long start = 0l;
+
     public static void main(String[] args) {
+//        test1();
+        testTimer();
+    }
+
+    private static void testTimer() {
+        Timer timer=new Timer();
+
+        TimerTask task1 = new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("task1 invoked : " + (System.currentTimeMillis() - start));
+            }
+        };
+
+        TimerTask task2 = new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("task2 invoked : " + (System.currentTimeMillis() - start));
+            }
+        };
+
+        start = System.currentTimeMillis();
+
+        timer.schedule(task1,1000);
+        timer.schedule(task2,3000);
+    }
+
+
+    private static void test1() {
         Scheduler.Worker w = INSTANCE.createWorker();
         final CountDownLatch cdl = new CountDownLatch(1);
         ContextManager.set(1);
@@ -62,6 +95,5 @@ public class Test {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 }

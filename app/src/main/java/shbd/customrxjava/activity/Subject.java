@@ -1,6 +1,7 @@
 package shbd.customrxjava.activity;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -21,6 +22,7 @@ public abstract class Subject {
     public void notifyObservers(String state) {
         for (Observer observer : observers) {
             observer.update(state);
+            LinkedList
         }
     }
 
