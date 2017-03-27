@@ -8,7 +8,7 @@ import net.yh.app5.activity.Subscriber;
 
 public class Test {
     public static void main(String[] args) {
-        test1();
+//        test1();
         test2();
     }
 
@@ -27,19 +27,20 @@ public class Test {
             }
         };
 
-        Observable<String> observable1 = Observable.create(onSubscribe1);
+        final Observable<String> observable1 = Observable.create(onSubscribe1);
 
-        final Subscriber<String> subscriber2 = new Subscriber<String>() {
-            @Override
-            public void onNext(String s) {
-                s = s + "ffffff";
-                subscriber1.onNext(s);
-            }
-        };
+
         Observable.OnSubscribe<String> onSubscribe2 = new Observable.OnSubscribe<String>() {
             @Override
-            public void call(Subscriber<String> subscriber) {
-                onSubscribe1.call(subscriber);
+            public void call(final Subscriber<String> subscriber) {
+                Subscriber<String> newSubscriber = new Subscriber<String>() {
+                    @Override
+                    public void onNext(String s) {
+                        s = s + "ffffff";
+                        subscriber.onNext(s);
+                    }
+                };
+                observable1.onSubscribe.call(newSubscriber);
             }
         };
         Observable observable2 = new Observable(onSubscribe2);
@@ -72,5 +73,7 @@ public class Test {
             }
         };
         observable2.subscribe(subscriber1);
-    }
+
+
+     }
 }

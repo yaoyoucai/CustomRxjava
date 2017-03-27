@@ -1,5 +1,8 @@
 package shbd.app4.activity;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.CountDownLatch;
@@ -26,7 +29,24 @@ public class Test {
 
     public static void main(String[] args) {
 //        test1();
-        testTimer();
+       /* testTimer();
+        Observable.just()*/
+        int i = 20 /8;
+        //int i=20&8;
+        System.out.println(i);
+
+        Map m=new HashMap();
+        System.out.println("添加put方法：(1,'a'),(2,'b'),(3,'c'),(4,'d')");
+        m.put("1","a");
+        m.put("2","b");
+        m.put("3","c");
+        m.put("4","d");
+
+        Iterator iterator = m.entrySet().iterator();
+        while(iterator.hasNext()){
+            Map.Entry entry = (Map.Entry)iterator.next();
+            System.out.println("next : "+ entry.getKey() +" - "+entry.getValue());
+        }
     }
 
     private static void testTimer() {

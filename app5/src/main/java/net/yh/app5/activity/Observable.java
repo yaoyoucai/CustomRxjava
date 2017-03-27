@@ -5,7 +5,7 @@ package net.yh.app5.activity;
  */
 
 public class Observable<T> {
-    private OnSubscribe onSubscribe;
+    public OnSubscribe onSubscribe;
 
     public Observable(OnSubscribe onSubscribe) {
         this.onSubscribe = onSubscribe;
